@@ -64,6 +64,8 @@ dependencies {
     implementation 'org.bstats:bstats-bukkit:3.0.2'  // Updated bStats
     implementation 'com.github.cryptomorin:XSeries:9.8.0'  // Updated XSeries
 
+    compileOnly 'com.github.SkriptLang:Skript:2.7.0' // Optional Skript dependency
+
     // https://github.com/PlaceholderAPI/PlaceholderAPI
 }
 

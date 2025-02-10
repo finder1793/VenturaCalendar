@@ -4,7 +4,7 @@ main: me.m0dii.venturacalendar.VenturaCalendar
 api-version: '1.21'  
 authors: [M0dii]
 description: Calendar plugin for Minecraft servers
-softdepend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI, Skript]
 commands:
   venturacalendar:
     description: Base command
