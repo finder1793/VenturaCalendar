@@ -68,6 +68,16 @@ dependencies {
     compileOnly 'com.github.SkriptLang:Skript:2.10.0' // Optional Skript dependency
 
     // https://github.com/PlaceholderAPI/PlaceholderAPI
+
+    // Add test dependencies
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+    
+    // Add useful utilities
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    
+    // Add configuration framework
+    implementation 'org.spongepowered:configurate-yaml:4.1.2'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -77,4 +87,8 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))  // Updated to Java 21
+}
+
+test {
+    useJUnitPlatform()
 }
