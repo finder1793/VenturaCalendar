@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.*;
 import java.util.stream.Collectors;
+import net.kyori.adventure.text.Component;
 
 public class RealTimeCalendar implements InventoryHolder {
     private final RealTimeDate date;
@@ -82,7 +83,8 @@ public class RealTimeCalendar implements InventoryHolder {
         Map<InventoryProperties, Object> calendarProperties = VenturaCalendar.getInstance()
                 .getCalendarConfig().getCalendarProperties(false);
 
-        String title = Utils.setPlaceholders((String) calendarProperties.get(InventoryProperties.HEADER), date, true);
+        String rawTitle = Utils.setPlaceholders((String) calendarProperties.get(InventoryProperties.HEADER), date, true);
+        Component title = Component.text(rawTitle);
 
         Inventory inventory = Bukkit.createInventory(this, getInventorySize(date), title);
 

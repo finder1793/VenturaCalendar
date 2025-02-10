@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'me.M0dii'
-version '2.5.2'
+version '2.5.3'
 
 shadowJar {
     relocate 'org.bstats', 'me.m0dii.venturacalendar'
@@ -15,10 +15,11 @@ shadowJar {
 }
 
 processResources {
-    eachFile {
-        if (file.name.endsWith(".yml")) {
-            expand version: version
-        }
+    filesMatching('plugin.yml') {
+        expand(
+            'version': version,
+            'project': project
+        )
     }
 }
 
@@ -54,20 +55,23 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT'
-//    compileOnly 'org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT' // Only local
+    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'  // Using 1.21.1 which is more stable
+    //compileOnly 'org.spigotmc:spigot:1.19.2-R0.1-SNAPSHOT' // Only local
     //compileOnly 'com.arcaniax:HeadDatabase-API:1.3.1'
 
-    compileOnly 'me.clip:placeholderapi:2.10.10'
+    compileOnly 'me.clip:placeholderapi:2.11.5' // Updated PAPI version
 
-    implementation 'org.bstats:bstats-bukkit:2.2.1'
-    implementation 'com.github.cryptomorin:XSeries:8.6.1'
+    implementation 'org.bstats:bstats-bukkit:3.0.2'  // Updated bStats
+    implementation 'com.github.cryptomorin:XSeries:9.8.0'  // Updated XSeries
 
     // https://github.com/PlaceholderAPI/PlaceholderAPI
 }
 
-compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21  // Updated to Java 21
+}
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))  // Updated to Java 21
 }

@@ -1,2 +1,4 @@
 rootProject.name = 'VenturaCalendar'
 
+gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS
+

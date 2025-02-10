@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class ItemCreator {
-    final ItemStack item;
+    private final ItemStack item;
+    private final ItemMeta meta;
 
     public ItemCreator(Material material, int amount, String name, List<String> lore) {
         if (material == null) {
@@ -22,15 +23,23 @@ public class ItemCreator {
             material = Material.GLASS_PANE;
         }
 
-        item = new ItemStack(material, amount);
+        this.item = new ItemStack(material, amount);
+        this.meta = item.getItemMeta();
 
-        ItemMeta itemMeta = item.getItemMeta();
+        // Check if the name contains custom model data indicator
+        if (name.contains("#")) {
+            String[] split = name.split("#");
+            name = split[0];
 
-        itemMeta.setDisplayName(name);
+            try {
+                // Set custom model data from the value after #
+                meta.setCustomModelData(Integer.parseInt(split[1]));
+            } catch (NumberFormatException ignored) { }
+        }
 
-        itemMeta.setLore(lore);
-
-        item.setItemMeta(itemMeta);
+        meta.setDisplayName(name);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
     }
 
     public ItemCreator(Material material, int amount, String name, List<String> lore, String skullOwner) {
@@ -42,18 +51,26 @@ public class ItemCreator {
             material = Material.GLASS_PANE;
         }
 
-        item = new ItemStack(material, amount);
+        this.item = new ItemStack(material, amount);
+        this.meta = item.getItemMeta();
 
-        ItemMeta itemMeta = item.getItemMeta();
+        // Check if the name contains custom model data indicator
+        if (name.contains("#")) {
+            String[] split = name.split("#");
+            name = split[0];
 
-        itemMeta.setDisplayName(name);
+            try {
+                // Set custom model data from the value after #
+                meta.setCustomModelData(Integer.parseInt(split[1]));
+            } catch (NumberFormatException ignored) { }
+        }
 
-        itemMeta.setLore(lore);
-
-        item.setItemMeta(itemMeta);
+        meta.setDisplayName(name);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
 
         if (material.equals(XMaterial.PLAYER_HEAD.parseMaterial())) {
-            SkullMeta skullMeta = (SkullMeta) itemMeta;
+            SkullMeta skullMeta = (SkullMeta) meta;
 
             UUID uuid = UUID.fromString(skullOwner);
 
