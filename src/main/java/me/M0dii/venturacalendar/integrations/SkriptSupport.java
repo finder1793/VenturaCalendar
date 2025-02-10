@@ -3,8 +3,12 @@ package me.m0dii.venturacalendar.integrations;
 import ch.njol.skript.Skript;
 import ch.njol.skript.lang.ExpressionType;
 import ch.njol.skript.registrations.EventValues;
+import ch.njol.skript.lang.util.SimpleEvent;
 import ch.njol.skript.util.Getter;
 import me.m0dii.venturacalendar.VenturaCalendar;
+import me.m0dii.venturacalendar.integrations.skript.ExprCalendarDay;
+import me.m0dii.venturacalendar.integrations.skript.ExprCalendarMonth;
+import me.m0dii.venturacalendar.integrations.skript.ExprCalendarYear;
 import me.m0dii.venturacalendar.base.events.NewDayEvent;
 import me.m0dii.venturacalendar.base.dateutils.Date;
 import org.bukkit.World;
@@ -27,20 +31,9 @@ public class SkriptSupport {
         Skript.registerEvent("ventura calendar new day", SimpleEvent.class, NewDayEvent.class,
                 "ventura calendar new day");
 
-        // Register Event Values
-        EventValues.registerEventValue(NewDayEvent.class, World.class, new Getter<World, NewDayEvent>() {
-            @Override
-            public World get(NewDayEvent event) {
-                return event.getWorld();
-            }
-        }, 0);
-
-        EventValues.registerEventValue(NewDayEvent.class, Date.class, new Getter<Date, NewDayEvent>() {
-            @Override
-            public Date get(NewDayEvent event) {
-                return event.getDate();
-            }
-        }, 0);
+        // Register Event Values using modern API
+        EventValues.registerEventValue(NewDayEvent.class, World.class, e -> e.getWorld());
+        EventValues.registerEventValue(NewDayEvent.class, Date.class, e -> e.getDate());
 
         // Register Expressions
         Skript.registerExpression(ExprCalendarDay.class, Number.class, ExpressionType.PROPERTY,

@@ -52,6 +52,7 @@ repositories {
 
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+    maven { url = 'https://repo.skriptlang.org/releases' }
 }
 
 dependencies {
@@ -64,7 +65,7 @@ dependencies {
     implementation 'org.bstats:bstats-bukkit:3.0.2'  // Updated bStats
     implementation 'com.github.cryptomorin:XSeries:9.8.0'  // Updated XSeries
 
-    compileOnly 'com.github.SkriptLang:Skript:2.7.0' // Optional Skript dependency
+    compileOnly 'com.github.SkriptLang:Skript:2.10.0' // Optional Skript dependency
 
     // https://github.com/PlaceholderAPI/PlaceholderAPI
 }

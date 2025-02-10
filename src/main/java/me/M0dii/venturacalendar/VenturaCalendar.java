@@ -201,7 +201,9 @@ public class VenturaCalendar extends JavaPlugin implements Listener {
                 newDay = true;
 
                 Bukkit.getScheduler().runTask(this, () -> {
-                    Bukkit.getPluginManager().callEvent(new NewDayEvent(ts));
+                    World world = Bukkit.getWorld(ts.getWorldName());
+                    Date date = DateCalculator.fromTicks(world.getFullTime(), ts);
+                    Bukkit.getPluginManager().callEvent(new NewDayEvent(ts, world, date));
                 });
             }
 

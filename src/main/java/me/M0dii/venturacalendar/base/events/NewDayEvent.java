@@ -1,6 +1,8 @@
 package me.m0dii.venturacalendar.base.events;
 
+import me.m0dii.venturacalendar.base.dateutils.Date;
 import me.m0dii.venturacalendar.base.dateutils.TimeSystem;
+import org.bukkit.World;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,9 +13,13 @@ public class NewDayEvent extends Event implements Cancellable {
     private boolean isCancelled;
 
     private final TimeSystem ts;
+    private final World world;
+    private final Date date;
 
-    public NewDayEvent(TimeSystem ts) {
+    public NewDayEvent(TimeSystem ts, World world, Date date) {
         this.ts = ts;
+        this.world = world;
+        this.date = date;
     }
 
     public static HandlerList getHandlerList() {
@@ -37,5 +43,13 @@ public class NewDayEvent extends Event implements Cancellable {
 
     public TimeSystem getTimeSystem() {
         return ts;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

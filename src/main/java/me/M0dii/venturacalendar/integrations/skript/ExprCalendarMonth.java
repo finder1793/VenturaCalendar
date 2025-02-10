@@ -6,26 +6,26 @@ import me.m0dii.venturacalendar.base.dateutils.DateCalculator;
 import me.m0dii.venturacalendar.base.dateutils.TimeSystem;
 import org.bukkit.World;
 
-public class ExprCalendarDay extends SimplePropertyExpression<World, Number> {
+public class ExprCalendarMonth extends SimplePropertyExpression<World, Number> {
 
     static {
-        register(ExprCalendarDay.class, Number.class,
-                "[ventura] calendar day",
+        register(ExprCalendarMonth.class, Number.class,
+                "[ventura] calendar month",
                 "world");
     }
 
     @Override
     protected String getPropertyName() {
-        return "calendar day";
+        return "calendar month";
     }
 
     @Override
     public Number convert(World world) {
         TimeSystem ts = VenturaCalendar.getInstance().getTimeConfig().getTimeSystem();
         if(ts.isRealTime()) {
-            return DateCalculator.realTimeNow().getDay();
+            return DateCalculator.realTimeNow().getMonth();
         }
-        return DateCalculator.fromTicks(world.getFullTime(), ts).getDay();
+        return DateCalculator.fromTicks(world.getFullTime(), ts).getMonth();
     }
 
     @Override
